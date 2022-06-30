@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:clima_weather_app/utilities/constants.dart';
+import 'package:clima_weather_app/Screens/location_screen.dart';
+import 'package:clima_weather_app/services/network.dart';
 
 class CityScreen extends StatefulWidget {
   @override
@@ -7,6 +9,11 @@ class CityScreen extends StatefulWidget {
 }
 
 class _CityScreenState extends State<CityScreen> {
+
+  GetNetworkLocationData getNetworkLocationData = new GetNetworkLocationData();
+
+  String? cityName;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +31,9 @@ class _CityScreenState extends State<CityScreen> {
               Align(
                 alignment: Alignment.topLeft,
                 child: FlatButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   child: Icon(
                     Icons.arrow_back_ios,
                     size: 50.0,
@@ -33,10 +42,32 @@ class _CityScreenState extends State<CityScreen> {
               ),
               Container(
                 padding: EdgeInsets.all(20.0),
-                child: null,
+                child: TextField(
+                  onChanged: (value){
+                    cityName=value;
+                  },
+                  style: TextStyle(color: Colors.black),
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.location_city),
+                    filled: true,
+                    fillColor: Colors.white,
+                    hintText: 'Enter City Name',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    border: OutlineInputBorder(
+                      borderRadius:BorderRadius.circular(10.0),
+                      borderSide:BorderSide.none,
+                    ),
+                  ),
+
+                ),
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: () {
+
+                  getNetworkLocationData.getCityResponse(cityName)
+                      .whenComplete(() => Navigator.push(context, MaterialPageRoute(builder: (context)=>LocationScreen(data: getNetworkLocationData.city_data,))));
+
+                },
                 child: Text(
                   'Get Weather',
                   style: kButtonTextStyle,
