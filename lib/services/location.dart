@@ -5,6 +5,8 @@ class Location{
   double? latitude;
   double? longitude;
 
+
+
   Future<void> getLocation() async
   {
     try{
