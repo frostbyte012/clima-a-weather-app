@@ -5,7 +5,6 @@ import 'location.dart';
 
 const appID="YOUR APP ID HERE";
 
-
 class GetNetworkLocationData
 {
 
