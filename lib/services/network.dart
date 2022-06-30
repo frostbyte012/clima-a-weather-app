@@ -3,7 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'location.dart';
 
-const appID="YOUR APP ID HERE";
+const appID="YOUR OPEN WEATHER MAP ID HERE";
 
 class GetNetworkLocationData
 {
